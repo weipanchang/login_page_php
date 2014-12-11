@@ -16,14 +16,14 @@ if(!$fgmembersite->CheckLogin())
 </head>
 <body>
 <div id='fg_membersite_content'>
-<h2>This is an Access Controlled Page</h2>
+<h2>AireTalk idx Query Page</h2>
 This page can be accessed after logging in only. To make more access controlled pages, 
 copy paste the code between &lt;?php and ?&gt; to the page and name the page to be php.
 
 </head>  
 <body> 
 
-<form method="post" action="se10.php">
+<form method="post" action="idx_check.php">
 
 Check Member Data
 
@@ -57,10 +57,38 @@ Check Member Data
  
 <?php  
 
-	$phonenum = $_POST['phonenum']; //Primary Phone Number
+$hostname = "localhost";
+$user = "root";
+$password = "abc123";
+$database = "test";
+        if (!isset($_POST['phonenum'])) 
+          {
+           $phonenum = null;
+          }
+        else 
+          {
+	   $phonenum = $_POST['phonenum']; //Primary Phone Number
+          }
+	
+        if (!isset($_POST['email'])) 
+          {
+           $email = null;
+          }
+        else
+          {
+           $email = $_POST['email'];
+          }
+	
 
-	$email = $_POST['email'];
-	$idx = $_POST['idx'];
+        if (!isset($_POST['idx'])) 
+          {
+           $idx = null;
+          }
+        else
+          {
+            $idx = $_POST['idx'];
+          }
+
 	$phonenum1 = str_replace("+","",$phonenum);
 
 if ( ($_POST) && ( strlen($phonenum1) >4 ) )
@@ -72,8 +100,8 @@ echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone
 echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
 
 
-$DBConnect=mysql_connect("74.3.164.16", "root", "fafayou123!!") or die(mysql_error());
-mysql_select_db("fafa") or die(mysql_error());
+$DBConnect=mysql_connect("localhost", "root", "abc123") or die(mysql_error());
+mysql_select_db("test") or die(mysql_error());
 //$phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
 
@@ -87,11 +115,6 @@ $success = false;
 $TableName = "member";
 $long =0.0001;
 $lat =0.0001;
-
-
-
-
-
 
 //----------------------- Please use $plan to select dialplan
 //------------------------use rate for calling rate
@@ -117,8 +140,8 @@ $lat =0.0001;
 		$lat = $row['longitude'];
 
         $idxxx= $row['idx'] ;
-        $dbconnect=mysql_connect("71.19.247.49", "root", "fafayou123!!") or die(mysql_error());
-          mysql_select_db("freeswitch") or die(mysql_error());
+        $dbconnect=mysql_connect($hostname, $user, $password ) or die(mysql_error());
+          mysql_select_db($database) or die(mysql_error());
 
         echo "idxx==".$idxxx;
 
@@ -143,7 +166,7 @@ $lat =0.0001;
 		$long= $long/1000000;
 		echo "   ";
 		$lat= $lat/1000000;
-mysqli_close($DBConnect);
+mysql_close($DBConnect);
 
 }
 
@@ -156,9 +179,8 @@ echo "<tr style='font-weight: bold;'>";
 echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
 echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
 
-
-$DBConnect=mysql_connect("74.3.164.16", "root", "fafayou123!!") or die(mysql_error());
-mysql_select_db("fafa") or die(mysql_error());
+$DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+mysql_select_db("test") or die(mysql_error());
 $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
 
@@ -190,7 +212,7 @@ $TableName = "member";
 		echo "</table>";  
 
 
-mysqli_close($DBConnect);
+        mysql_close($DBConnect);
 
 }
 
@@ -203,8 +225,8 @@ echo "<tr style='font-weight: bold;'>";
 echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
 echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
 
-$DBConnect=mysql_connect("74.3.164.16", "root", "fafayou123!!") or die(mysql_error());
-mysql_select_db("fafa") or die(mysql_error());
+$DBConnect=mysql_connect($hostanem, $user, $password) or die(mysql_error());
+mysql_select_db($database) or die(mysql_error());
 $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
 
@@ -235,8 +257,8 @@ $TableName = "member";
 		echo "</tr>"; 
         
         $idxxx= $row['idx'] ;
-         $dbconnect=mysql_connect("71.19.247.49", "root", "fafayou123!!") or die(mysql_error());
-           mysql_select_db("freeswitch") or die(mysql_error());
+         $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+           mysql_select_db($test) or die(mysql_error());
 
 
          echo "idxx==".$idxxx;
@@ -263,22 +285,10 @@ $TableName = "member";
 		echo "</table>";  
 
 
-mysqli_close($DBConnect);
+//mysqli_close($DBConnect);
+mysql_close($DBConnect);
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 ?> 
