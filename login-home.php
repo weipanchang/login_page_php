@@ -22,7 +22,7 @@ Welcome back <?= $fgmembersite->UserFullName(); ?>!
 
 <p><a href='change-pwd.php'>Change password</a></p>
 
-<p><a href='access-controlled.php'>A sample 'members-only' page</a></p>
+<p><a href='idx_check.php'>AireTalk idx Query Page </a></p>
 <br><br><br>
 <p><a href='logout.php'>Logout</a></p>
 </div>
