@@ -16,45 +16,42 @@ if(!$fgmembersite->CheckLogin())
 </head>
 <body>
 <div id='fg_membersite_content'>
-<h2>AireTalk idx Query Page</h2>
-This page can be accessed after logging in only. To make more access controlled pages, 
-copy paste the code between &lt;?php and ?&gt; to the page and name the page to be php.
-
-</head>  
-<body> 
+<h2 style="color:blue; text-decoration: underline ">AireTalk Member Query Page</h2>
+<p style="color:red">
+Warning: This page is only to allow PingShow employee to access.<br> 
+</p>
+<p style="color:blue">
+Check Member Data
+</p>
 
 <form method="post" action="idx_check.php">
 
-Check Member Data
+<table> 
+
+<tr>
+<td style="color:blue" >Enter Phone Number</td>
+<td><input type="text" name="phonenum" size="30" value=""></td>
+</tr>
+ <tr>
+
+<td style="color:blue" >Enter Email</td>
+<td><input type="text" name="email" size="30" value=""></td>
+</tr>
+ <tr>
+
+<td style="color:blue">Enter idx</td>
+<td><input type="text" name="idx" size="30" value=""></td>
+</tr>
+ <tr>
 
 
-  <table> 
-
-	<tr>
-      <td>Enter Phone Number</td>
-      <td><input type="text" name="phonenum" size="30" value=""></td>
-    </tr>
-	 <tr>
-
-      <td>Enter Email</td>
-      <td><input type="text" name="email" size="30" value=""></td>
-    </tr>
-	 <tr>
-
-      <td>Enter idx</td>
-      <td><input type="text" name="idx" size="30" value=""></td>
-    </tr>
-	 <tr>
-
-
-
-      <td><input type="submit" value="Submit"></td>
-  </table>
+<td ><input type="submit" value="Submit" style="background-color:#0000ff; color:#fff;" ></td>
+</table>
 
 
 </form>
 
- 
+
 <?php  
 
 $hostname = "localhost";
@@ -64,32 +61,32 @@ $database = "test";
 
 
 if (!isset($_POST['phonenum'])) 
-  {
-   $phonenum = null;
-  }
+{
+$phonenum = null;
+}
 else 
-  {
-   $phonenum = $_POST['phonenum']; //Primary Phone Number
-  }
+{
+$phonenum = $_POST['phonenum']; //Primary Phone Number
+}
 
 if (!isset($_POST['email'])) 
-  {
-   $email = null;
-  }
+{
+$email = null;
+}
 else
-  {
-   $email = $_POST['email'];
-  }
+{
+$email = $_POST['email'];
+}
 
 
 if (!isset($_POST['idx'])) 
-  {
-   $idx = null;
-  }
+{
+$idx = null;
+}
 else
-  {
-    $idx = $_POST['idx'];
-  }
+{
+$idx = $_POST['idx'];
+}
 
 $phonenum1 = str_replace("+","",$phonenum);
 
