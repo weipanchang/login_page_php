@@ -58,7 +58,13 @@ $hostname = "localhost";
 $user = "root";
 $password = "abc123";
 $database = "test";
+$TableName = "member";
 
+$hostname1 = "localhost";
+$user1 = "root";
+$password1 = "abc123";
+$database1 = "test";
+$TableName1 = "accounts";
 
 if (!isset($_POST['phonenum'])) 
 {
@@ -105,13 +111,11 @@ mysql_select_db("test") or die(mysql_error());
 
 
 $number=$phonenum1;
-//$number="861082158603";
 $num = rtrim($number);
 $num1 = ltrim($num);
 
 //$num1 = "+".$num1;
 $success = false;
-$TableName = "member";
 $long =0.0001;
 $lat =0.0001;
 
@@ -144,8 +148,8 @@ $lat =0.0001;
 
         echo "idxx==".$idxxx;
 
-         //$sql="SELECT cash FROM accounts where id='$idxxx'";
-         $result5 = mysql_query("SELECT * FROM accounts WHERE id=".$idxxx,$dbconnect);
+         //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
+         $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
         $row = mysql_fetch_array( $result5 );
          if ($row)
                   {
@@ -155,17 +159,16 @@ $lat =0.0001;
 
               mysql_close($dbconnect);
 
-         echo " CASH =".$cash;
+         echo " CASH =".$cash."; ";
 
 
 		
 		}  
 		echo "</table>";  
-
-		$long= $long/1000000;
+//		$long= $long/1000000;
 		echo "   ";
-		$lat= $lat/1000000;
-mysql_close($DBConnect);
+//		$lat= $lat/1000000;
+// mysql_close($DBConnect);
 
 }
 
@@ -236,8 +239,6 @@ $TableName = "member";
 //------------------------use rate for calling rate
 
 
-
-
 		$result = mysql_query("SELECT * FROM $TableName WHERE idx = '$idx'");  
 		while($row=mysql_fetch_array($result))  
 		{ 
@@ -259,11 +260,10 @@ $TableName = "member";
          $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
            mysql_select_db($database) or die(mysql_error());
 
-
          echo "idxx==".$idxxx;
 
-          //$sql="SELECT cash FROM accounts where id='$idxxx'";
-          $result5 = mysql_query("SELECT * FROM accounts WHERE id=".$idxxx,$dbconnect);
+          //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
+          $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
          $row = mysql_fetch_array( $result5 );
           if ($row)
                    {
@@ -274,9 +274,6 @@ $TableName = "member";
                mysql_close($dbconnect);
 
           echo " CASH =".$cash."\n";
-
-
-
 
 		$success = true; 
 		
