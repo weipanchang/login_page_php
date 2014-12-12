@@ -105,8 +105,8 @@ echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone
 echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
 
 
-$DBConnect=mysql_connect("localhost", "root", "abc123") or die(mysql_error());
-mysql_select_db("test") or die(mysql_error());
+$DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
+mysql_select_db("$database") or die(mysql_error());
 //$phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
 
@@ -139,14 +139,14 @@ $lat =0.0001;
 		echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
 		echo "</tr>"; 
 		$success = true; 
-		$long = $row['latitude'];
-		$lat = $row['longitude'];
+	//	$long = $row['latitude'];
+	//	$lat = $row['longitude'];
 
         $idxxx= $row['idx'] ;
         $dbconnect=mysql_connect($hostname, $user, $password ) or die(mysql_error());
           mysql_select_db($database) or die(mysql_error());
 
-        echo "idxx==".$idxxx;
+        echo "idx==".$idxxx;
 
          //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
          $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
@@ -159,9 +159,7 @@ $lat =0.0001;
 
               mysql_close($dbconnect);
 
-         echo " CASH =".$cash."; ";
-
-
+         echo " CASH=".$cash.";  || ";
 		
 		}  
 		echo "</table>";  
@@ -182,12 +180,12 @@ echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone
 echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
 
 $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
-mysql_select_db("test") or die(mysql_error());
+mysql_select_db("$database") or die(mysql_error());
 $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
 
 $success = false;
-$TableName = "member";
+//$TableName = "member";
 
 //----------------------- Please use $plan to select dialplan
 //------------------------use rate for calling rate
@@ -209,13 +207,30 @@ $TableName = "member";
 		echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
 		echo "</tr>"; 
 		$success = true; 
-		
-		}  
+//		}
+  
+         $idxxx= $row['idx'];
+         $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+          mysql_select_db($database) or die(mysql_error());
+
+          echo "idx==".$idxxx;
+          //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
+          $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
+          $row = mysql_fetch_array( $result5 );
+          if ($row)
+                   {
+                       $cash=$row['cash'];
+                   }
+           mysql_close($dbconnect);
+
+          echo " CASH=".$cash."; || ";
+
+		$success = true; 
+	}	
 		echo "</table>";  
 
 
-        mysql_close($DBConnect);
-
+//        mysql_close($DBConnect);
 }
 
 
@@ -260,7 +275,7 @@ $TableName = "member";
          $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
            mysql_select_db($database) or die(mysql_error());
 
-         echo "idxx==".$idxxx;
+         echo "idx==".$idxxx;
 
           //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
           $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
@@ -269,11 +284,9 @@ $TableName = "member";
                    {
                        $cash=$row['cash'];
                    }
-
-
                mysql_close($dbconnect);
 
-          echo " CASH =".$cash."\n";
+          echo " CASH=".$cash.";  || ";
 
 		$success = true; 
 		
@@ -281,8 +294,8 @@ $TableName = "member";
 		echo "</table>";  
 
 
-//mysqli_close($DBConnect);
-mysql_close($DBConnect);
+          //mysqli_close($DBConnect);
+          mysql_close($DBConnect);
 
 }
 
