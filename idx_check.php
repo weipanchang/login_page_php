@@ -61,35 +61,37 @@ $hostname = "localhost";
 $user = "root";
 $password = "abc123";
 $database = "test";
-        if (!isset($_POST['phonenum'])) 
-          {
-           $phonenum = null;
-          }
-        else 
-          {
-	   $phonenum = $_POST['phonenum']; //Primary Phone Number
-          }
-	
-        if (!isset($_POST['email'])) 
-          {
-           $email = null;
-          }
-        else
-          {
-           $email = $_POST['email'];
-          }
-	
 
-        if (!isset($_POST['idx'])) 
-          {
-           $idx = null;
-          }
-        else
-          {
-            $idx = $_POST['idx'];
-          }
 
-	$phonenum1 = str_replace("+","",$phonenum);
+if (!isset($_POST['phonenum'])) 
+  {
+   $phonenum = null;
+  }
+else 
+  {
+   $phonenum = $_POST['phonenum']; //Primary Phone Number
+  }
+
+if (!isset($_POST['email'])) 
+  {
+   $email = null;
+  }
+else
+  {
+   $email = $_POST['email'];
+  }
+
+
+if (!isset($_POST['idx'])) 
+  {
+   $idx = null;
+  }
+else
+  {
+    $idx = $_POST['idx'];
+  }
+
+$phonenum1 = str_replace("+","",$phonenum);
 
 if ( ($_POST) && ( strlen($phonenum1) >4 ) )
 {
@@ -225,7 +227,7 @@ echo "<tr style='font-weight: bold;'>";
 echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
 echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
 
-$DBConnect=mysql_connect($hostanem, $user, $password) or die(mysql_error());
+$DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
 mysql_select_db($database) or die(mysql_error());
 $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
@@ -258,7 +260,7 @@ $TableName = "member";
         
         $idxxx= $row['idx'] ;
          $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
-           mysql_select_db($test) or die(mysql_error());
+           mysql_select_db($database) or die(mysql_error());
 
 
          echo "idxx==".$idxxx;
