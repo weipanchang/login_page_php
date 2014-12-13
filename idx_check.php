@@ -29,16 +29,21 @@ Check Member Data
 <table> 
 
 <tr>
-<td style="color:blue" >Enter Phone Number</td>
+<td style="color:blue" >Enter Phone Number or UUID</td>
 <td><input type="text" name="phonenum" size="30" value=""></td>
+</tr>
+
+<tr>
+<td style="color:blue" >Enter Nickname</td>
+<td><input type="text" name="nickname" size="30" value=""></td>
 </tr>
  
 <tr>
 <td style="color:blue" >Enter Email</td>
 <td><input type="text" name="email" size="30" value=""></td>
 </tr>
- <tr>
 
+<tr>
 <td style="color:blue">Enter idx</td>
 <td><input type="text" name="idx" size="30" value=""></td>
 </tr>
@@ -72,6 +77,15 @@ else
     $phonenum = $_POST['phonenum']; //Primary Phone Number
     }
 
+if (!isset($_POST['nickname'])) 
+    {
+    $nickname = null;
+    }
+else
+    {
+    $nickname = $_POST['nickname'];
+    }
+    
 if (!isset($_POST['email'])) 
     {
     $email = null;
@@ -93,12 +107,12 @@ else
 
 $phonenum1 = str_replace("+","",$phonenum);
 
-if ( ($_POST) && ( strlen($phonenum1) >4 ) )
+if ( ($_POST) && ( strlen($phonenum1) >= 4 ) )
 {
     echo "<h2> Member Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
     echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
@@ -137,7 +151,7 @@ if ( ($_POST) && ( strlen($phonenum1) >4 ) )
     $dbconnect=mysql_connect($hostname, $user, $password ) or die(mysql_error());
      mysql_select_db($database1) or die(mysql_error());
 
-    echo "idx==".$idxxx;
+    echo "idx=".$idxxx;
 
     //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
     $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
@@ -160,17 +174,77 @@ if ( ($_POST) && ( strlen($phonenum1) >4 ) )
 }
 
 
+if ( ($_POST) && ( strlen($nickname) >=2 ) )
+    {
+    echo "<h2> Member Check  : </h2>";  
+    echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
+    echo "<tr style='font-weight: bold;'>";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
+    
+    $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+    mysql_select_db("$database") or die(mysql_error());
+//    $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
+
+    $success = false;
+    //$TableName = "member";
+    
+    //----------------------- Please use $plan to select dialplan
+    //------------------------use rate for calling rate
+	
+    $result = mysql_query("SELECT * FROM $TableName WHERE nickname LIKE '%$nickname%'");  
+    while($row=mysql_fetch_array($result))  
+	{ 
+            echo "<tr style='font-weight: bold;'>"; 
+            echo "<tr>";  
+            echo "<td align='center' width='200'>" . $row['idx'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
+            echo "</tr>"; 
+            $success = true; 
+//		}
+
+            $idxxx= $row['idx'];
+            $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+             mysql_select_db($database1) or die(mysql_error());
+   
+            echo "idx=".$idxxx;
+            //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
+            $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
+            $row = mysql_fetch_array( $result5 );
+            if ($row)
+                      {
+                          $cash=$row['cash'];
+                      }
+            mysql_close($dbconnect);
+            echo " CASH=".$cash."; || ";
+   
+            $success = true; 
+	}	
+	echo "</table>";  
+//      mysql_close($DBConnect);
+    }
+
+
+
+
 if ( ($_POST) && ( strlen($email) >=4 ) )
     {
     echo "<h2> Member Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
     echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
     mysql_select_db("$database") or die(mysql_error());
-    $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
+    //$phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
     $success = false;
     //$TableName = "member";
@@ -200,7 +274,7 @@ if ( ($_POST) && ( strlen($email) >=4 ) )
             $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
              mysql_select_db($database1) or die(mysql_error());
    
-            echo "idx==".$idxxx;
+            echo "idx=".$idxxx;
             //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
             $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
             $row = mysql_fetch_array( $result5 );
@@ -217,12 +291,12 @@ if ( ($_POST) && ( strlen($email) >=4 ) )
 //      mysql_close($DBConnect);
     }
 
-if ( ($_POST) && ( strlen($idx) >2 ) )
+if ( ($_POST) && ( strlen($idx) > 2 ) )
     {
     echo "<h2> Member Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
     echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
@@ -252,7 +326,7 @@ if ( ($_POST) && ( strlen($idx) >2 ) )
             $idxxx= $row['idx'] ;
             $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
             mysql_select_db($database1) or die(mysql_error());
-            echo "idx==".$idxxx;
+            echo "idx=".$idxxx;
 //              $sql="SELECT cash FROM $TableName1 where id='$idxxx'";
             $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
             $row = mysql_fetch_array( $result5 );
