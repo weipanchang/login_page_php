@@ -85,7 +85,7 @@ class PHPMailer {
    * will be sent via -f to sendmail or as 'MAIL FROM' in smtp mode.
    * @var string
    */
-  var $Sender            = 'wchang@pingshow.net';
+  var $Sender            = 'webmaster@pingshow.net';
 
   /**
    * Sets the Subject of the message.
@@ -120,7 +120,7 @@ class PHPMailer {
    * Method to send mail: ("mail", "sendmail", or "smtp").
    * @var string
    */
-  var $Mailer            = 'sendmail';
+  var $Mailer            = 'smtp';
 
   /**
    * Sets the path of the sendmail program.
