@@ -85,20 +85,20 @@ class PHPMailer {
    * will be sent via -f to sendmail or as 'MAIL FROM' in smtp mode.
    * @var string
    */
-  var $Sender            = '';
+  var $Sender            = 'wchang@pingshow.net';
 
   /**
    * Sets the Subject of the message.
    * @var string
    */
-  var $Subject           = '';
+  var $Subject           = 'test test';
 
   /**
    * Sets the Body of the message.  This can be either an HTML or text body.
    * If HTML then run IsHTML(true).
    * @var string
    */
-  var $Body              = '';
+  var $Body              = 'This is only a test';
 
   /**
    * Sets the text-only body of the message.  This automatically sets the
@@ -120,7 +120,7 @@ class PHPMailer {
    * Method to send mail: ("mail", "sendmail", or "smtp").
    * @var string
    */
-  var $Mailer            = 'mail';
+  var $Mailer            = 'sendmail';
 
   /**
    * Sets the path of the sendmail program.
@@ -145,7 +145,7 @@ class PHPMailer {
    * Sets the email address that a reading confirmation will be sent.
    * @var string
    */
-  var $ConfirmReadingTo  = '';
+  var $ConfirmReadingTo  = 'wchang@pingshow.net';
 
   /**
    * Sets the hostname to use in Message-Id and Received headers
@@ -160,7 +160,7 @@ class PHPMailer {
    * If empty, a unique id will be generated.
    * @var string
    */
-  var $MessageID         = '';
+  var $MessageID         = '1';
 
   /////////////////////////////////////////////////
   // PROPERTIES FOR SMTP
@@ -174,13 +174,13 @@ class PHPMailer {
    * Hosts will be tried in order.
    * @var string
    */
-  var $Host        = 'localhost';
+  var $Host        = 'smtp.pingshow.net';
 
   /**
    * Sets the default SMTP server port.
    * @var int
    */
-  var $Port        = 25;
+  var $Port        = 587;
 
   /**
    * Sets the SMTP HELO of the message (Default is $Hostname).
@@ -205,13 +205,13 @@ class PHPMailer {
    * Sets SMTP username.
    * @var string
    */
-  var $Username     = '';
+  var $Username     = 'wchang';
 
   /**
    * Sets SMTP password.
    * @var string
    */
-  var $Password     = '';
+  var $Password     = 'hotmail!234';
 
   /**
    * Sets the SMTP server timeout in seconds. This function will not
