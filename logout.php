@@ -18,5 +18,9 @@ $fgmembersite->LogOut();
 <a href='login.php'>Login Again</a>
 </p>
 
+<p>
+<a href='index.html'>home page</a>
+</p>
+
 </body>
 </html>

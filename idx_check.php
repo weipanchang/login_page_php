@@ -353,7 +353,7 @@ if ( ($_POST) && ( strlen($idx) > 2 ) )
 Logged in as: <?= $fgmembersite->UserFullName() ?>
 </p>
 <p>
-<a href='login-home.php'>Home</a>
+<a href='login-home.php'>Menu Page</a>
 </p>
 </div>
 </body>
