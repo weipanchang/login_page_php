@@ -32,8 +32,8 @@ Check Member Data
 <td style="color:blue" >Enter Phone Number</td>
 <td><input type="text" name="phonenum" size="30" value=""></td>
 </tr>
- <tr>
-
+ 
+<tr>
 <td style="color:blue" >Enter Email</td>
 <td><input type="text" name="email" size="30" value=""></td>
 </tr>
@@ -42,265 +42,235 @@ Check Member Data
 <td style="color:blue">Enter idx</td>
 <td><input type="text" name="idx" size="30" value=""></td>
 </tr>
- <tr>
 
-
+<tr>
 <td ><input type="submit" value="Submit" style="background-color:#0000ff; color:#fff;" ></td>
 </table>
 
-
 </form>
-
 
 <?php  
 
 $hostname = "localhost";
 $user = "root";
 $password = "abc123";
-$database = "test";
+$database = "fafa";
 $TableName = "member";
 
 $hostname1 = "localhost";
 $user1 = "root";
 $password1 = "abc123";
-$database1 = "test";
+$database1 = "freeswitch";
 $TableName1 = "accounts";
 
 if (!isset($_POST['phonenum'])) 
-{
-$phonenum = null;
-}
+    {
+    $phonenum = null;
+    }
 else 
-{
-$phonenum = $_POST['phonenum']; //Primary Phone Number
-}
+    {
+    $phonenum = $_POST['phonenum']; //Primary Phone Number
+    }
 
 if (!isset($_POST['email'])) 
-{
-$email = null;
-}
+    {
+    $email = null;
+    }
 else
-{
-$email = $_POST['email'];
-}
+    {
+    $email = $_POST['email'];
+    }
 
 
 if (!isset($_POST['idx'])) 
-{
-$idx = null;
-}
+    {
+    $idx = null;
+    }
 else
-{
-$idx = $_POST['idx'];
-}
+    {
+    $idx = $_POST['idx'];
+    }
 
 $phonenum1 = str_replace("+","",$phonenum);
 
 if ( ($_POST) && ( strlen($phonenum1) >4 ) )
 {
-echo "<h2> Member Check  : </h2>";  
-echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
-echo "<tr style='font-weight: bold;'>";  
-echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
-echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
-
-
-$DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
-mysql_select_db("$database") or die(mysql_error());
-//$phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
-
-
-$number=$phonenum1;
-$num = rtrim($number);
-$num1 = ltrim($num);
-
-//$num1 = "+".$num1;
-$success = false;
-$long =0.0001;
-$lat =0.0001;
-
-//----------------------- Please use $plan to select dialplan
-//------------------------use rate for calling rate
+    echo "<h2> Member Check  : </h2>";  
+    echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
+    echo "<tr style='font-weight: bold;'>";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
+    
+    $DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
+    mysql_select_db("$database") or die(mysql_error());
+    //$phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
+    
+    $number=$phonenum1;
+    $num = rtrim($number);
+    $num1 = ltrim($num);
+    
+    //$num1 = "+".$num1;
+    $success = false;
+    $long =0.0001;
+    $lat =0.0001;
 	
-		$result = mysql_query("SELECT * FROM $TableName WHERE id LIKE '%$num1%'");  
-		while($row=mysql_fetch_array($result))  
-		{ 
-		echo "<tr style='font-weight: bold;'>"; 
-		echo "<tr>";  
-		echo "<td align='center' width='200'>" . $row['idx'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
+    $result = mysql_query("SELECT * FROM $TableName WHERE id LIKE '%$num1%'");  
+    while($row=mysql_fetch_array($result))  
+    { 
+    echo "<tr style='font-weight: bold;'>"; 
+    echo "<tr>";  
+    echo "<td align='center' width='200'>" . $row['idx'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
+    echo "</tr>"; 
+    $success = true; 
+//	$long = $row['latitude'];
+//	$lat = $row['longitude'];
 
-		echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
-		echo "</tr>"; 
-		$success = true; 
-	//	$long = $row['latitude'];
-	//	$lat = $row['longitude'];
+    $idxxx= $row['idx'] ;
+    $dbconnect=mysql_connect($hostname, $user, $password ) or die(mysql_error());
+     mysql_select_db($database1) or die(mysql_error());
 
-        $idxxx= $row['idx'] ;
-        $dbconnect=mysql_connect($hostname, $user, $password ) or die(mysql_error());
-          mysql_select_db($database) or die(mysql_error());
+    echo "idx==".$idxxx;
 
-        echo "idx==".$idxxx;
+    //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
+    $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
+    $row = mysql_fetch_array( $result5 );
+    if ($row)
+             {
+                 $cash=$row['cash'];
+             }
+    mysql_close($dbconnect);
 
-         //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
-         $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
-        $row = mysql_fetch_array( $result5 );
-         if ($row)
-                  {
-                      $cash=$row['cash'];
-                  }
-
-
-              mysql_close($dbconnect);
-
-         echo " CASH=".$cash.";  || ";
-		
-		}  
-		echo "</table>";  
+    echo " CASH=".$cash.";  || ";
+    
+    }  
+    echo "</table>";  
 //		$long= $long/1000000;
-		echo "   ";
+    echo "   ";
 //		$lat= $lat/1000000;
-// mysql_close($DBConnect);
+//  mysql_close($DBConnect);
 
 }
 
 
 if ( ($_POST) && ( strlen($email) >=4 ) )
-{
-echo "<h2> Member Check  : </h2>";  
-echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
-echo "<tr style='font-weight: bold;'>";  
-echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
-echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
+    {
+    echo "<h2> Member Check  : </h2>";  
+    echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
+    echo "<tr style='font-weight: bold;'>";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
+    
+    $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+    mysql_select_db("$database") or die(mysql_error());
+    $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
-$DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
-mysql_select_db("$database") or die(mysql_error());
-$phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
-
-
-$success = false;
-//$TableName = "member";
-
-//----------------------- Please use $plan to select dialplan
-//------------------------use rate for calling rate
+    $success = false;
+    //$TableName = "member";
+    
+    //----------------------- Please use $plan to select dialplan
+    //------------------------use rate for calling rate
 	
-		$result = mysql_query("SELECT * FROM $TableName WHERE email LIKE '%$email%'");  
-		while($row=mysql_fetch_array($result))  
-		{ 
-		echo "<tr style='font-weight: bold;'>"; 
-		echo "<tr>";  
-		echo "<td align='center' width='200'>" . $row['idx'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
-
-		echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
-		echo "</tr>"; 
-		$success = true; 
+    $result = mysql_query("SELECT * FROM $TableName WHERE email LIKE '%$email%'");  
+    while($row=mysql_fetch_array($result))  
+	{ 
+            echo "<tr style='font-weight: bold;'>"; 
+            echo "<tr>";  
+            echo "<td align='center' width='200'>" . $row['idx'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
+            echo "</tr>"; 
+            $success = true; 
 //		}
-  
-         $idxxx= $row['idx'];
-         $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
-          mysql_select_db($database) or die(mysql_error());
 
-          echo "idx==".$idxxx;
-          //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
-          $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
-          $row = mysql_fetch_array( $result5 );
-          if ($row)
-                   {
-                       $cash=$row['cash'];
-                   }
-           mysql_close($dbconnect);
-
-          echo " CASH=".$cash."; || ";
-
-		$success = true; 
+            $idxxx= $row['idx'];
+            $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+             mysql_select_db($database1) or die(mysql_error());
+   
+            echo "idx==".$idxxx;
+            //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
+            $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
+            $row = mysql_fetch_array( $result5 );
+            if ($row)
+                      {
+                          $cash=$row['cash'];
+                      }
+            mysql_close($dbconnect);
+            echo " CASH=".$cash."; || ";
+   
+            $success = true; 
 	}	
-		echo "</table>";  
-
-
-//        mysql_close($DBConnect);
-}
-
+	echo "</table>";  
+//      mysql_close($DBConnect);
+    }
 
 if ( ($_POST) && ( strlen($idx) >2 ) )
-{
-echo "<h2> Member Check  : </h2>";  
-echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
-echo "<tr style='font-weight: bold;'>";  
-echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
-echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
+    {
+    echo "<h2> Member Check  : </h2>";  
+    echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
+    echo "<tr style='font-weight: bold;'>";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
+    
+    $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+    mysql_select_db($database) or die(mysql_error());
+//    $phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
 
-$DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
-mysql_select_db($database) or die(mysql_error());
-$phonenum1 = preg_replace("/[^0-9]/", '', $phonenum1);
-
-
-$success = false;
-$TableName = "member";
+    $success = false;
 
 //----------------------- Please use $plan to select dialplan
 //------------------------use rate for calling rate
 
-
-		$result = mysql_query("SELECT * FROM $TableName WHERE idx = '$idx'");  
-		while($row=mysql_fetch_array($result))  
-		{ 
-		echo "<tr style='font-weight: bold;'>"; 
-		echo "<tr>";  
-		echo "<td align='center' width='200'>" . $row['idx'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
-
-		echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
-		echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
-		echo "</tr>"; 
-        
-        $idxxx= $row['idx'] ;
-         $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
-           mysql_select_db($database) or die(mysql_error());
-
-         echo "idx==".$idxxx;
-
-          //$sql="SELECT cash FROM $TableName1 where id='$idxxx'";
-          $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
-         $row = mysql_fetch_array( $result5 );
-          if ($row)
-                   {
-                       $cash=$row['cash'];
-                   }
-               mysql_close($dbconnect);
-
-          echo " CASH=".$cash.";  || ";
-
-		$success = true; 
-		
-		}  
-		echo "</table>";  
-
-
-          //mysqli_close($DBConnect);
-          mysql_close($DBConnect);
-
-}
-
+    $result = mysql_query("SELECT * FROM $TableName WHERE idx = '$idx'");  
+    while($row=mysql_fetch_array($result))  
+        { 
+            echo "<tr style='font-weight: bold;'>"; 
+            echo "<tr>";  
+            echo "<td align='center' width='200'>" . $row['idx'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
+            echo "</tr>"; 
+            $idxxx= $row['idx'] ;
+            $dbconnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
+            mysql_select_db($database1) or die(mysql_error());
+            echo "idx==".$idxxx;
+//              $sql="SELECT cash FROM $TableName1 where id='$idxxx'";
+            $result5 = mysql_query("SELECT * FROM $TableName1 WHERE id=".$idxxx,$dbconnect);
+            $row = mysql_fetch_array( $result5 );
+            if ($row)
+               {
+                $cash=$row['cash'];
+               }
+            mysql_close($dbconnect);
+            echo " CASH=".$cash.";  || ";
+            $success = true; 
+        }  
+    echo "</table>";  
+//  mysqli_close($DBConnect);
+    mysql_close($DBConnect);
+    }
 
 ?> 
+
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
