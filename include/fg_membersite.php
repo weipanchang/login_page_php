@@ -38,7 +38,7 @@ class FGMembersite
     //-----Initialization -------
     function FGMembersite()
     {
-        $this->sitename = 'YourWebsiteName.com';
+        $this->sitename = 'pingshow.net';
         $this->rand_key = '0iQx5oBk66oVZep';
     }
     
@@ -338,7 +338,7 @@ class FGMembersite
 
         $host = $_SERVER['SERVER_NAME'];
 
-        $from ="nobody@$host";
+        $from ="webmaster@pingshow.net";
         return $from;
     } 
     
@@ -635,12 +635,14 @@ class FGMembersite
         $mailer->From = $this->GetFromAddress();        
         
         $confirmcode = $formvars['confirmcode'];
-        
-        $confirm_url = $this->GetAbsoluteURLFolder().'/confirmreg.php?code='.$confirmcode;
+//      replace firm_rul with login_page       
+//        $confirm_url = $this->GetAbsoluteURLFolder().'/confirmreg.php?code='.$confirmcode;
+        $confirm_url = $this->GetAbsoluteURLFolder();
         
         $mailer->Body ="Hello ".$formvars['name']."\r\n\r\n".
         "Thanks for your registration with ".$this->sitename."\r\n".
-        "Please click the link below to confirm your registration.\r\n".
+//        "Please click the link below to confirm your registration.\r\n".
+        "Please click the link below to login PingShow internal website.\r\n".
         "$confirm_url\r\n".
         "\r\n".
         "Regards,\r\n".
@@ -700,11 +702,12 @@ class FGMembersite
         {
             return false;
         }
-        if(!$this->IsFieldUnique($formvars,'email'))
-        {
-            $this->HandleError("This email is already registered");
-            return false;
-        }
+//check if email is unique
+        //if(!$this->IsFieldUnique($formvars,'email'))
+        //{
+        //    $this->HandleError("This email is already registered");
+        //    return false;
+        //}
         
         if(!$this->IsFieldUnique($formvars,'username'))
         {

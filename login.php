@@ -46,6 +46,10 @@ if(isset($_POST['submitted']))
     <input type='submit' name='Submit' value='Submit' />
 </div>
 <div class='short_explanation'><a href='reset-pwd-req.php'>Forgot Password?</a></div>
+<p>
+<a href='index.html'>Home Page</a>
+</p>
+
 </fieldset>
 </form>
 <!-- client-side Form Validations:

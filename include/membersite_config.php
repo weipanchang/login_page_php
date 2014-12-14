@@ -7,7 +7,7 @@ $fgmembersite = new FGMembersite();
 $fgmembersite->SetWebsiteName('pingshow.net');
 
 //Provide the email address where you want to get notifications
-$fgmembersite->SetAdminEmail('wchang@pingshow.net');
+$fgmembersite->SetAdminEmail('webmaster@pingshow.net');
 
 //Provide your database login details here:
 //hostname, user name, password, database name and table name

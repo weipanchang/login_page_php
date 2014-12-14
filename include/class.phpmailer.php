@@ -72,13 +72,13 @@ class PHPMailer {
    * Sets the From email address for the message.
    * @var string
    */
-  var $From              = 'root@localhost';
+  var $From              = 'webmaster@pingshow.net';
 
   /**
    * Sets the From name of the message.
    * @var string
    */
-  var $FromName          = 'Root User';
+  var $FromName          = 'webmaster';
 
   /**
    * Sets the Sender email (Return-Path) of the message.  If not empty,
@@ -145,7 +145,7 @@ class PHPMailer {
    * Sets the email address that a reading confirmation will be sent.
    * @var string
    */
-  var $ConfirmReadingTo  = 'wchang@pingshow.net';
+  var $ConfirmReadingTo  = 'webmaster@pingshow.net';
 
   /**
    * Sets the hostname to use in Message-Id and Received headers
@@ -205,13 +205,13 @@ class PHPMailer {
    * Sets SMTP username.
    * @var string
    */
-  var $Username     = 'wchang';
+  var $Username     = 'webmaster';
 
   /**
    * Sets SMTP password.
    * @var string
    */
-  var $Password     = 'hotmail!234';
+  var $Password     = 'airetalk!!pwd';
 
   /**
    * Sets the SMTP server timeout in seconds. This function will not
