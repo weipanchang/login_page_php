@@ -1,7 +1,10 @@
 <?PHP
 require_once("./include/membersite_config.php");
 
-if(!$fgmembersite->CheckLogin())
+$controller_list=array("fred yang");
+if(!$fgmembersite->CheckLogin() or !(in_array( $fgmembersite->UserFullName(), $controller_list)))
+#if(!$fgmembersite->CheckLogin() or ("fred yang" !== ( $fgmembersite->UserFullName() )))
+#if(!$fgmembersite->CheckLogin())
 {
     $fgmembersite->RedirectToURL("login.php");
     exit;
