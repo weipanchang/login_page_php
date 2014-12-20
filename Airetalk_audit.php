@@ -16,7 +16,12 @@
     <title>Audit: Cash update</title>
 </head>  
 
-<body> 
+<body>
+    
+<p>
+<a href='login-home.php'>Menu Page</a>
+</p>
+
 <?php
     function prTblHeadings() {
         $a=func_get_args();
@@ -28,7 +33,7 @@
     
     $n = (isset($_REQUEST['n'])) ?$_REQUEST['n'] :7;
     $nDay = $n - 1;
-    $dbs66 = new mysqli("74.3.165.66", "root", "fafayou123!!", "fafa") or die(mysql_error());
+    $dbs66 = new mysqli("74.3.164.16", "root", "fafayou123!!", "fafa") or die(mysql_error());
     $dbs49 = new mysqli("71.19.247.49", "root", "fafayou123!!", "freeswitch") or die(mysql_error());
     $txResults = $dbs49->query(
         "SELECT ad.id, ad.changetime, format(ad.amount,4), format(ad.newBalance,4), ad.acctId, a.imei, format(a.cash,4)".
@@ -62,6 +67,14 @@
     }
     echo "</table>";  
     echo "<br><b>Last updated ".date('Y-m-d H:i:s T')."</b>\n";
-?> 
+?>
+
+<p>
+Logged in as: <?= $fgmembersite->UserFullName() ?>
+</p>
+<p>
+<a href='login-home.php'>Menu Page</a>
+</p>
+
 </body>  
 </html>   
