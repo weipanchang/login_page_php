@@ -31,25 +31,38 @@ if(!$fgmembersite->CheckLogin() or !(in_array( $fgmembersite->UserFullName(), $c
         }
     }
     
+    $hostname = "localhost";
+    $user = "root";
+    $password = "abc123";
+    $database = "fafa";
+    $TableName = "auditAcctCash";
+    $TableName_1 = "member";
+    
+    $hostname1 = "localhost";
+    $user1 = "root";
+    $password1 = "abc123";
+    $database1 = "freeswitch";
+    $TableName1 = "accounts";
+    
     $n = (isset($_REQUEST['n'])) ?$_REQUEST['n'] :7;
     $nDay = $n - 1;
-    $dbs66 = new mysqli("74.3.164.16", "root", "fafayou123!!", "fafa") or die(mysql_error());
-    $dbs49 = new mysqli("71.19.247.49", "root", "fafayou123!!", "freeswitch") or die(mysql_error());
+    $dbs66 = new mysqli("$hostname", "$user", "$password", "$database") or die(mysql_error());
+    $dbs49 = new mysqli("$hostname1", "$user1", "$password1", "$database1") or die(mysql_error());
     $txResults = $dbs49->query(
         "SELECT ad.id, ad.changetime, format(ad.amount,4), format(ad.newBalance,4), ad.acctId, a.imei, format(a.cash,4)".
-        " FROM auditAcctCash ad LEFT JOIN accounts a".
+        " FROM $TableName ad LEFT JOIN $TableName1 a".
         " ON ad.acctId = a.id".
         " WHERE ad.changetime > DATE_SUB(CURDATE(), INTERVAL $nDay DAY)".
         " ORDER BY ad.id DESC");
 //<h2 style="color:blue; text-decoration: underline ">AireTalk Member Query Page</h2>
-    echo "<h2 style='color:blue; text-decoration: underline '>Audit: Cash update more than $10 on 71.19.247.49 freeswitch.accounts for the past $n day(s)</h2>";
+    echo "<h2 style='color:blue; text-decoration: underline '>Audit: Cash update more than $10 on $hostname2 $database1.$TableName1 for the past $n day(s)</h2>";
     echo "<table border='1' style='border-collapse: collapse; border-color: silver'>";  
     prTblHeadings("update time", "added amount", "Balance after added ", "current Balance", "acct Id",
         "ID", "email", "last login", "created");
     echo "</tr>";  
     while ($row=$txResults->fetch_assoc()) { 
         $query = "SELECT id, email, lastlogin, created".
-            " FROM member".
+            " FROM $TableName_1".
             " WHERE idx=".$row['acctId'];
         $mbr = $dbs66->query($query)->fetch_assoc();
         echo "<tr>\n";  
