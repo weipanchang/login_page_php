@@ -113,7 +113,7 @@ if ( (($_POST) and ( strlen($start_time) >= 8 ) and strlen($end_time) >= 8 ))
     echo "<h2> Payment Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='300' align='center'>time</td><td width='100' align='center'>amount</td><td width='100' align='center'>status</td><td width='300' align='center'>payment_id</td>";
+    echo "<td width='100' align='center'>id</td><td width='300' align='center'>time</td><td width='100' align='center'>amount</td><td width='150' align='center'>status</td><td width='400' align='center'>payment_id</td>";
     //echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
@@ -134,11 +134,11 @@ if ( (($_POST) and ( strlen($start_time) >= 8 ) and strlen($end_time) >= 8 ))
     { 
         echo "<tr style='font-weight: bold;'>"; 
         echo "<tr>";  
-        echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
-        echo "<td align='center' width='200'>" . $row['time'] . "</td>";  
-        echo "<td align='center' width='300'>" . $row['amount'] . "</td>";  
-        echo "<td align='center' width='100'>" . $row['status'] . "</td>";  
-        echo "<td align='center' width='100'>" . $row['payment_id'] . "</td>";  
+        echo "<td align='center' width='100'>" . $row['id'] . "</td>";  
+        echo "<td align='center' width='300'>" . $row['time'] . "</td>";  
+        echo "<td align='center' width='100'>" . $row['amount'] . "</td>";  
+        echo "<td align='center' width='150'>" . $row['status'] . "</td>";  
+        echo "<td align='center' width='400'>" . $row['payment_id'] . "</td>";  
         echo "</tr>"; 
     $success = true; 
     }	
@@ -152,7 +152,7 @@ if ( ($_POST) && ( strlen($amount) > 0 ) )
 echo "<h2> Payment Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='300' align='center'>time</td><td width='100' align='center'>amount</td><td width='100' align='center'>status</td><td width='300' align='center'>payment_id</td>";
+    echo "<td width='100' align='center'>id</td><td width='300' align='center'>time</td><td width='100' align='center'>amount</td><td width='150' align='center'>status</td><td width='400' align='center'>payment_id</td>";
     //echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
@@ -166,11 +166,11 @@ echo "<h2> Payment Check  : </h2>";
         { 
             echo "<tr style='font-weight: bold;'>"; 
             echo "<tr>";  
-            echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
-            echo "<td align='center' width='200'>" . $row['time'] . "</td>";  
-            echo "<td align='center' width='300'>" . $row['amount'] . "</td>";  
-            echo "<td align='center' width='100'>" . $row['status'] . "</td>";  
-            echo "<td align='center' width='100'>" . $row['payment_id'] . "</td>"; 
+            echo "<td align='center' width='100'>" . $row['id'] . "</td>";  
+            echo "<td align='center' width='300'>" . $row['time'] . "</td>";  
+            echo "<td align='center' width='100'>" . $row['amount'] . "</td>";  
+            echo "<td align='center' width='150'>" . $row['status'] . "</td>";  
+            echo "<td align='center' width='400'>" . $row['payment_id'] . "</td>"; 
             echo "</tr>"; 
             $success = true; 
         }  
