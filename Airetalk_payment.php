@@ -1,7 +1,7 @@
 <?PHP
 require_once("./include/membersite_config.php");
 
-$controller_list=array("fred yang");
+$controller_list=array("maria pei", "william chang");
 if(!$fgmembersite->CheckLogin() or !(in_array( $fgmembersite->UserFullName(), $controller_list)))
 {
     $fgmembersite->RedirectToURL("login.php");
@@ -157,6 +157,9 @@ echo "<h2> Payment Check  : </h2>";
     
     $DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
     mysql_select_db("$database") or die(mysql_error());
+    $amt=$amount;
+    $amt1 = rtrim($amt);
+    $amount = ltrim($amt1);
     $success = false;
     $result = mysql_query("SELECT * FROM $TableName WHERE CONCAT(amount) = '$amount' order by id DESC LIMIT 90");  
     while($row=mysql_fetch_array($result))  
