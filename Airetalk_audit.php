@@ -1,12 +1,12 @@
 <?PHP
-//require_once("./include/membersite_config.php");
-//
-//$controller_list=array("fred yang");
-//if(!$fgmembersite->CheckLogin() or !(in_array( $fgmembersite->UserFullName(), $controller_list)))
-//    {
-//        $fgmembersite->RedirectToURL("login.php");
-//        exit;
-//    }
+require_once("./include/membersite_config.php");
+
+$controller_list=array("fred yang");
+if(!$fgmembersite->CheckLogin() or !(in_array( $fgmembersite->UserFullName(), $controller_list)))
+    {
+        $fgmembersite->RedirectToURL("login.php");
+        exit;
+    }
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">  
@@ -44,7 +44,7 @@
 //<h2 style="color:blue; text-decoration: underline ">AireTalk Member Query Page</h2>
     echo "<h2 style='color:blue; text-decoration: underline '>Audit: Cash update more than $10 on 71.19.247.49 freeswitch.accounts for the past $n day(s)</h2>";
     echo "<table border='1' style='border-collapse: collapse; border-color: silver'>";  
-    prTblHeadings("update time", "added mount", "after added Balance", "current Balance", "acct Id",
+    prTblHeadings("update time", "added amount", "Balance after added ", "current Balance", "acct Id",
         "ID", "email", "last login", "created");
     echo "</tr>";  
     while ($row=$txResults->fetch_assoc()) { 
