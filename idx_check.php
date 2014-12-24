@@ -400,7 +400,7 @@ if ( (($_POST) and ( strlen($created_start_time) >= 8 ) and strlen($created_end_
       {
           $total=$row['count(*)'];
       }
-    echo " TOTAL Member Created in the Period=".$total;
+    echo " TOTAL Members Created in the Period = ".$total;
 }
 ?>
 
