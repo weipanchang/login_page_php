@@ -48,6 +48,19 @@ Check Member Data
 <td><input type="text" name="idx" size="30" value=""></td>
 </tr>
 
+
+<tr>
+<td style="color:blue" ><span style ="font-style:italic;font-size:70%;color:black">Search with member crateion date</span> Start Date YYYY-MM-DD</td>
+<td><input type="text" name="created_start_time" size="15" value=""</td>
+<!--<td><input type="text" name="created_start_time" size="8" value=""</td>-->
+<!--</tr>
+
+<tr>-->
+<td style="color:blue" ><span style ="font-style:italic;font-size:70%;color:black">Search with member crateion date</span> End Date YYYY-MM-DD</td>
+<!--<td style="color:blue" ><span style ="font-style:italic;font-size:70%;color:black">Search with member crateion date</span> End Date YYYY-MM-DD</td>-->
+<td><input type="text" name="created_end_time" size="15" value="<?php echo date('Y-m-d'); ?>"></td>
+</tr>
+
 <tr>
 <td ><input type="submit" value="Submit" style="background-color:#0000ff; color:#fff;" ></td>
 </table>
@@ -105,6 +118,27 @@ else
     $idx = $_POST['idx'];
     }
 
+
+if (!isset($_POST['created_start_time'])) 
+    {
+    $created_start_time = null;
+    }
+else
+    {
+    $created_start_time = $_POST['created_start_time'];
+    }
+
+
+if (!isset($_POST['created_end_time'])) 
+    {
+    $created_end_time = null;
+    }
+else
+    {
+    $created_end_time = $_POST['created_end_time'];
+    }
+
+
 $phonenum1 = str_replace("+","",$phonenum);
 
 if ( ($_POST) && ( strlen($phonenum1) >= 4 ) )
@@ -112,7 +146,7 @@ if ( ($_POST) && ( strlen($phonenum1) >= 4 ) )
     echo "<h2> Member Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='100' align='center'>crate time</td>";
     echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
@@ -137,8 +171,9 @@ if ( ($_POST) && ( strlen($phonenum1) >= 4 ) )
     echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
     echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
     echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
-    echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
-    echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+    echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";
+    echo "<td align='center' width='300'>" . $row['created'] . "</td>";  
+    //echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
     echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
     echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
     echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
@@ -179,7 +214,7 @@ if ( ($_POST) && ( strlen($nickname) >=2 ) )
     echo "<h2> Member Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='100' align='center'>crate time</td>";  
     echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
@@ -201,8 +236,9 @@ if ( ($_POST) && ( strlen($nickname) >=2 ) )
             echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
-            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
-            echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";
+            echo "<td align='center' width='300'>" . $row['created'] . "</td>";  
+            //echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
@@ -239,7 +275,7 @@ if ( ($_POST) && ( strlen($email) >=4 ) )
     echo "<h2> Member Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='100' align='center'>crate time</td>";  
     echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
@@ -261,8 +297,9 @@ if ( ($_POST) && ( strlen($email) >=4 ) )
             echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
-            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
-            echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";
+            echo "<td align='center' width='300'>" . $row['created'] . "</td>";  
+            //echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
@@ -296,7 +333,7 @@ if ( ($_POST) && ( strlen($idx) > 2 ) )
     echo "<h2> Member Check  : </h2>";  
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";  
     echo "<tr style='font-weight: bold;'>";  
-    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='20' align='center'>status</td>  ";  
+    echo "<td width='200' align='center'>id</td><td width='200' align='center'>phone number / UUID</td><td width='100' align='center'>password</td><td width='100' align='center'>email</td><td width='100' align='center'>nickname</td><td width='100' align='center'>crate time</td>";  
     echo "<td width='100' align='center'>homeid</td><td width='100' align='center'>roamid</td><td width='100' align='center'>sipIP</td></tr>";  
     
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
@@ -317,8 +354,9 @@ if ( ($_POST) && ( strlen($idx) > 2 ) )
             echo "<td align='center' width='200'>" . $row['id'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['password'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['email'] . "</td>";  
-            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";  
-            echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
+            echo "<td align='center' width='200'>" . $row['nickname'] . "</td>";
+            echo "<td align='center' width='300'>" . $row['created'] . "</td>";  
+            //echo "<td align='center' width='200'>" . $row['status'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['homeserid'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['roamserid'] . "</td>";  
             echo "<td align='center' width='200'>" . $row['roamserip'] . "</td>";  
