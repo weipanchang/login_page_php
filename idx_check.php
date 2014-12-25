@@ -27,7 +27,11 @@ Check Member Data
 <form method="post" action="idx_check.php">
 
 <table>
-
+<?php
+  $timezone = "America/Los_Angeles";
+  date_default_timezone_set($timezone);
+  $today = date("Y-m-d 00:00:00");
+?>
 <tr>
 <td style="color:blue" >Enter Phone Number or UUID</td>
 <td><input type="text" name="phonenum" size="30" value=""></td>
@@ -68,16 +72,15 @@ Check Member Data
 
 <?php
 
-
-$hostname = "74.3.164.16";
+$hostname = "localhot";
 $user = "root";
-$password = "fafayou123!!";
+$password = "abc123";
 $database = "fafa";
 $TableName = "member";
 
-$hostname1 = "71.19.247.49";
+$hostname1 = "localhost";
 $user1 = "root";
-$password1 = "fafayou123!!";
+$password1 = "abc123";
 $database1 = "freeswitch";
 $TableName1 = "accounts";
 
