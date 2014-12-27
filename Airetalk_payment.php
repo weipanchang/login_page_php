@@ -191,7 +191,11 @@ echo "<h2> Payment Check  : </h2>";
 Logged in as: <?= $fgmembersite->UserFullName() ?>
 </p>
 <p>
-<a href='login-home.php'>Back to Menu Page</a>
+<a href='login-home.php'>Menu Page</a>
+</p>
+
+<p>
+<a href='logout.php'>Logout</a>
 </p>
 </div>
 </body>

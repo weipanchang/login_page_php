@@ -119,6 +119,11 @@ Logged in as: <?= $fgmembersite->UserFullName() ?>
 <p>
 <a href='login-home.php'>Menu Page</a>
 </p>
+
+<p>
+<a href='logout.php'>Logout</a>
+</p>
+
 </div>
 </body>
 </html>
