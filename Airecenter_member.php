@@ -33,7 +33,7 @@ Check AireCenter Member Data
   $today = date("Y-m-d 00:00:00");
 ?>
 <tr>
-<td style="color:blue" >UUID</td>
+<td style="color:blue" >UUID<span style ="font-style:italic;font-size:70%;color:green"> will be shown after typing in 'support1' in 'mood' field on STB</span></td>
 <td><input type="text" name="uuid" size="30" value=""></td>
 </tr>
 
@@ -48,18 +48,18 @@ Check AireCenter Member Data
 </tr>
 
 <tr>
-<td style="color:blue">Enter idx</td>
+<td style="color:blue">Enter idx </td>
 <td><input type="text" name="idx" size="30" value=""></td>
 </tr>
 
 <tr>
-<td style="color:blue" ><span style ="font-style:italic;font-size:70%;color:black">Search with STB register date</span> Start Date YYYY-MM-DD</td>
+<td style="color:blue" >Start Date YYYY-MM-DD<span style ="font-style:italic;font-size:70%;color:green"> Search with STB register date</span></td>
 <td><input type="text" name="created_start_time" size="10" value=""</td>
 <!--<td><input type="text" name="created_start_time" size="8" value=""</td>-->
 <!--</tr>
 
 <tr>-->
-<td style="color:blue" ><span style ="font-style:italic;font-size:70%;color:black">Search with STB register date</span> End Date YYYY-MM-DD</td>
+<td style="color:blue" >End Date YYYY-MM-DD<span style ="font-style:italic;font-size:70%;color:green"> Search with STB register date</span></td>
 <!--<td style="color:blue" ><span style ="font-style:italic;font-size:70%;color:black">Search with member crateion date</span> End Date YYYY-MM-DD</td>-->
 <td><input type="text" name="created_end_time" size="10" value="<?php echo date('Y-m-d'); ?>"></td>
 </tr>

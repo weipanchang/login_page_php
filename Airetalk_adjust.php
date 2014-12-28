@@ -29,7 +29,7 @@ if(!$fgmembersite->CheckLogin() or !(in_array( $fgmembersite->UserFullName(), $c
    </tr>
 
    <tr>
-      <td>Enter idx</td>
+      <td>Enter id</td>
       <td><input type="text" name="idx" size="30" value=""></td>
    </tr>
    <tr>
