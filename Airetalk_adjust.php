@@ -20,7 +20,7 @@ if(!$fgmembersite->CheckLogin() or !(in_array( $fgmembersite->UserFullName(), $c
 <body> 
 <form method="post" action="Airetalk_adjust.php">
 <br>
-<h2 style="color:blue; text-decoration: underline ">Update Member Credit</h2>
+<h2 style="color:blue; text-decoration: underline">Update Member Credit</h2>
 
   <table>
    <tr> 

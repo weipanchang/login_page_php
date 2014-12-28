@@ -22,13 +22,16 @@ Welcome back <?= $fgmembersite->UserFullName(); ?>!
 
 <li><p><a href='change-pwd.php'>Change password</a></p></li>
 
-<li><p><a href='idx_check.php'>AireTalk Query Page </a></p></li>
+<li><a href='idx_check.php'>AireTalk Query Page </a></li>
+<li><a href='Airecenter_member.php' style="color:blue"> Airecenter Query Page</a></li><br>
 
 <li><a href='Airetalk_adjust.php' style="color:blue"> AireTalk Credit Adjust Page <span style="color:red">(Controller Access Only)</span></a></li>
 
 <li><a href='Airetalk_audit.php' style="color:blue"> AireTalk Credit Audit Page <span style="color:red">(Controller Access Only)</span></a></li>
 
 <li><a href='Airetalk_payment.php' style="color:blue"> AireTalk Payment Search Page <span style="color:red">(Controller Access Only)</span></a></li>
+
+<li><a href='Airecenter_adjust.php' style="color:blue"> AireCenter Activation Status Adjust Page <span style="color:red">(Controller Access Only)</span></a></li>
 <br><br><br>
 <p><a href='logout.php'>Logout</a></p>
 </div>
