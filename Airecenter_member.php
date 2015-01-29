@@ -84,6 +84,10 @@ $password1 = "abc123";
 $database1 = "freeswitch";
 $TableName1 = "accounts";
 
+function getloc($ip)
+{
+    return json_decode(file_get_contents("http://freegeoip.net/json/".$ip), 1);
+}
 
 if (!isset($_POST['uuid']))
     {
@@ -149,7 +153,7 @@ if ( ($_POST) && ( strlen($uuid) >= 6 ) )
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";
     echo "<tr style='font-weight: bold;'>";
     echo "<td width='120' align='center'>UUID</td><td width='100' align='center'>Password</td><td width='120' align='center'>EMAIL</td><td width='200' align='center'>Nickname</td><td width='100' align='center'>id</td><td width='100' align='center'>Crate Date</td>";
-    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td></tr>";
+    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td><td width='100' align='center'>Country</td><td width='100' align='center'>City</td></tr>";
 
     $DBConnect=mysql_connect("$hostname", "$user", "$password") or die(mysql_error());
     mysql_select_db("$database") or die(mysql_error());
@@ -164,6 +168,8 @@ if ( ($_POST) && ( strlen($uuid) >= 6 ) )
     $result = mysql_query("SELECT * FROM $TableName WHERE id LIKE '%$uuid%'");
     while($row=mysql_fetch_array($result))
     {
+        $ip=$row['ip_addr'];
+        $location = getloc($ip);
         echo "<tr style='font-weight: bold;'>";
         echo "<tr>";
         echo "<td align='center' width='120'>" . $row['id'] . "</td>";
@@ -178,6 +184,8 @@ if ( ($_POST) && ( strlen($uuid) >= 6 ) )
         echo "<td align='center' width='100'>" . $row['last_purchase'] . "</td>";
         echo "<td align='center' width='100'>" . $row['expire'] . "</td>";
         echo "<td align='center' width='100'>" . $row['ip_addr'] . "</td>";
+        echo "<td align='center' width='200'>" . $location["country_name"] . "</td>";
+        echo "<td align='center' width='200'>" . $location["city"] . "</td>";
         echo "</tr>";
         $success = true;
 //        $idxxx= $row['idx'] ;
@@ -193,7 +201,7 @@ if (($_POST) && ( strlen($nickname) >=2 ) )
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";
     echo "<tr style='font-weight: bold;'>";
     echo "<td width='120' align='center'>UUID</td><td width='100' align='center'>Password</td><td width='120' align='center'>EMAIL</td><td width='200' align='center'>Nickname</td><td width='100' align='center'>id</td><td width='100' align='center'>Crate Date</td>";
-    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td></tr>";
+    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td><td width='100' align='center'>Country</td><td width='100' align='center'>City</td></tr>";
 
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
     mysql_select_db("$database") or die(mysql_error());
@@ -202,6 +210,8 @@ if (($_POST) && ( strlen($nickname) >=2 ) )
     $result = mysql_query("SELECT * FROM $TableName WHERE nickname LIKE '%$nickname%'");
     while($row=mysql_fetch_array($result))
 	{
+            $ip=$row['ip_addr'];
+            $location = getloc($ip);
             echo "<tr style='font-weight: bold;'>";
             echo "<tr>";
             echo "<td align='center' width='120'>" . $row['id'] . "</td>";
@@ -216,6 +226,8 @@ if (($_POST) && ( strlen($nickname) >=2 ) )
             echo "<td align='center' width='100'>" . $row['last_purchase'] . "</td>";
             echo "<td align='center' width='100'>" . $row['expire'] . "</td>";
             echo "<td align='center' width='100'>" . $row['ip_addr'] . "</td>";
+            echo "<td align='center' width='200'>" . $location["country_name"] . "</td>";
+            echo "<td align='center' width='200'>" . $location["city"] . "</td>";
             echo "</tr>";
             $success = true;
 //		}
@@ -231,7 +243,7 @@ if ( ($_POST) && ( strlen($email) >=4 ) )
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";
     echo "<tr style='font-weight: bold;'>";
     echo "<td width='120' align='center'>UUID</td><td width='100' align='center'>Password</td><td width='120' align='center'>EMAIL</td><td width='200' align='center'>Nickname</td><td width='100' align='center'>id</td><td width='100' align='center'>Crate Date</td>";
-    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td></tr>";
+    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td><td width='100' align='center'>Country</td><td width='100' align='center'>City</td></tr>";
 
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
     mysql_select_db("$database") or die(mysql_error());
@@ -242,6 +254,8 @@ if ( ($_POST) && ( strlen($email) >=4 ) )
     $result = mysql_query("SELECT * FROM $TableName WHERE email LIKE '%$email%'");
     while($row=mysql_fetch_array($result))
 	{
+            $ip=$row['ip_addr'];
+            $location = getloc($ip);
             echo "<tr style='font-weight: bold;'>";
             echo "<tr>";
             echo "<td align='center' width='120'>" . $row['id'] . "</td>";
@@ -256,6 +270,8 @@ if ( ($_POST) && ( strlen($email) >=4 ) )
             echo "<td align='center' width='100'>" . $row['last_purchase'] . "</td>";
             echo "<td align='center' width='100'>" . $row['expire'] . "</td>";
             echo "<td align='center' width='100'>" . $row['ip_addr'] . "</td>";
+            echo "<td align='center' width='200'>" . $location["country_name"] . "</td>";
+            echo "<td align='center' width='200'>" . $location["city"] . "</td>";
             echo "</tr>";
             $success = true;
 
@@ -270,7 +286,7 @@ if ( ($_POST) && ( strlen($idx) > 2 ) )
     echo "<table border='1' style='border-collapse: collapse;border-color: silver;'>";
     echo "<tr style='font-weight: bold;'>";
     echo "<td width='120' align='center'>UUID</td><td width='100' align='center'>Password</td><td width='120' align='center'>EMAIL</td><td width='200' align='center'>Nickname</td><td width='100' align='center'>id</td><td width='100' align='center'>Crate Date</td>";
-    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td></tr>";
+    echo "<td width='100' align='center'>Account Type</td><td width='50' align='center'>Active</td><td width='100' align='center'>Product</td><td width='100' align='center'>Date Last Paid</td><td width='100' align='center'>Date Expired</td><td width='100' align='center'>ip ddress</td><td width='100' align='center'>Country</td><td width='100' align='center'>City</td></tr>";
 
     $DBConnect=mysql_connect($hostname, $user, $password) or die(mysql_error());
     mysql_select_db($database) or die(mysql_error());
@@ -280,6 +296,8 @@ if ( ($_POST) && ( strlen($idx) > 2 ) )
     $result = mysql_query("SELECT * FROM $TableName WHERE idx = '$idx'");
     while($row=mysql_fetch_array($result))
         {
+            $ip=$row['ip_addr'];
+            $location = getloc($ip);
             echo "<tr style='font-weight: bold;'>";
             echo "<tr>";
             echo "<td align='center' width='120'>" . $row['id'] . "</td>";
@@ -294,6 +312,8 @@ if ( ($_POST) && ( strlen($idx) > 2 ) )
             echo "<td align='center' width='100'>" . $row['last_purchase'] . "</td>";
             echo "<td align='center' width='100'>" . $row['expire'] . "</td>";
             echo "<td align='center' width='100'>" . $row['ip_addr'] . "</td>";
+            echo "<td align='center' width='200'>" . $location["country_name"] . "</td>";
+            echo "<td align='center' width='200'>" . $location["city"] . "</td>";
             echo "</tr>";
             $success = true;
         }
